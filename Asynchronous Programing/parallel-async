@@ -1,0 +1,41 @@
+function myFun1( callback){
+    const data ={name:"Abhijeet",lastName:"kumar"};
+    setTimeout(()=>{
+       callback(data);
+    },3000);
+};
+
+function myFun2(callback){
+    const data ={name:"Gaurav",lastName:"seth"};
+    setTimeout(()=>{
+        callback(data);
+     },2000);
+};
+
+myFun1((data)=>{console.log(`good morning ${data.name} ${data.lastName}`)});
+myFun2((data)=>{console.log(`good morning ${data.name} ${data.lastName}`)});
+
+
+
+
+const promise1 = new Promise((resolve, reject) => {
+    const data = { name: "Rohit", lastName: "Sharma" };
+    const isError = true; 
+  
+    setTimeout(() => {
+      if (isError) {
+        reject("An error occurred");
+      } else {
+        resolve(data);
+      }
+    }, 1000);
+});
+  
+promise1
+    .then((result) => {
+      console.log(`Good morning ${result.name} ${result.lastName}`);
+    })
+    .catch((error) => {
+      console.log(`Error: ${error}`);
+    });
+  
