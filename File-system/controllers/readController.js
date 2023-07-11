@@ -17,4 +17,5 @@ exports.read = (req, res) => {
   } catch (error) {
     res.status(500).send('Error reading merged file.');
   }
+
 };
