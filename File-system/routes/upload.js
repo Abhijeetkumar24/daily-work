@@ -1,20 +1,26 @@
 const express = require('express');
-const multer = require('multer');
 const router = express.Router();
+const uploadController = require('../controllers/uploadController');
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads');
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  }
-});
+/**
+* @swagger
+* /upload:
+* post:
+* summary: Upload a file
+* consumes:
+* - multipart/form-data
+* parameters:
+* - in: formData
+* name: file
+* type: file
+* description: The file to upload
+* responses:
+* 200:
+* description: File uploaded successfully
+*/
 
-const upload = multer({ storage });
-
-router.post('/', upload.any(), (req, res) => {
-  if (!req.files) {
+router.post('/', uploadController.upload, (req, res) => {
+  if (!req.files || req.files.length === 0) {
     return res.status(400).send('No file uploaded.');
   }
 
